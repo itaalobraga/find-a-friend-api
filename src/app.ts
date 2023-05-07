@@ -1,3 +1,4 @@
+import fastifyCors from "@fastify/cors";
 import fastifyJwt from "@fastify/jwt";
 import fastify from "fastify";
 import { ZodError } from "zod";
@@ -6,6 +7,8 @@ import { organizationsRoutes } from "./http/controllers/organizations/routes";
 import { UnathorizedError } from "./use-cases/errors/unathorized-error";
 
 export const app = fastify();
+
+app.register(fastifyCors);
 
 app.register(fastifyJwt, {
   secret: env.JWT_SECRET,

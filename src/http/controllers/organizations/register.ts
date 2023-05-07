@@ -7,12 +7,12 @@ export async function register(request: FastifyRequest, reply: FastifyReply) {
   const { body } = request;
 
   const organizationSchema = z.object({
-    responsibleName: z.string(),
+    responsibleName: z.string().nonempty("Campo obrigatório"),
     email: z.string().email("E-mail inválido"),
-    cep: z.string(),
-    address: z.string(),
-    phone: z.string(),
-    password: z.string(),
+    cep: z.string().nonempty("Campo obrigatório"),
+    address: z.string().nonempty("Campo obrigatório"),
+    phone: z.string().nonempty("Campo obrigatório"),
+    password: z.string().nonempty("Campo obrigatório"),
   });
 
   const organizationData = organizationSchema.parse(body);

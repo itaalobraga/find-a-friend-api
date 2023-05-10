@@ -23,6 +23,41 @@ model Organization {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  pets      Pet[]
 
   @@map("organizations")
+}
+
+model Pet {
+  id              String @id @default(uuid())
+  name            String
+  description     String
+  age             String
+  size            String
+  energyLevel     String
+  dependencyLevel String
+  environment     String
+  organizationId  String
+
+  organization Organization @relation(fields: [organizationId], references: [id])
+  files        PetImage[]
+
+  @@map("pets")
+}
+
+model PetImage {
+  id           String @id @default(uuid())
+  name         String
+  originalName String
+  mimetype     String
+  path         String
+  size         String
+  type         String
+
+  createdAt DateTime @default(now())
+
+  pet   Pet    @relation(fields: [petId], references: [id])
+  petId String
+
+  @@map("petImages")
 }

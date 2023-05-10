@@ -24,7 +24,7 @@ export async function register(request: FastifyRequest, reply: FastifyReply) {
 
     const { password, ...updatedOrganization } = organization;
 
-    return reply.status(200).send({
+    return reply.status(201).send({
       organization: updatedOrganization,
     });
   } catch (error) {
